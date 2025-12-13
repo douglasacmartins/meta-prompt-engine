@@ -1,0 +1,7 @@
+{
+  "github.copilot.chat.customAgents.showOrganizationAndEnterpriseAgents": true,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  }
+}
