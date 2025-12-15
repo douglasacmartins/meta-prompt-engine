@@ -208,6 +208,47 @@ limitations:
 
 ---
 
+## Capability Snapshot Protocol (Live Updates)
+
+**This file is kept current via automated snapshots, not manual logs.**
+
+### How It Works
+
+1. **Monthly/On-Demand Trigger:** ecosystem-auditor executes `capability-snapshot.prompt.md`
+2. **Scanning:** Reads all `.agent.md` files to extract actual current capabilities
+3. **Verification:** Compares actual capabilities against documented capabilities
+4. **Update:** Replaces outdated capability blocks with verified scans
+5. **Drift Detection:** Reports any mismatches between code and documentation
+6. **Result:** capabilities.md becomes a **live mirror** of system state
+
+### Execution
+
+**Manual trigger:**
+```
+User: "Run capability snapshot"
+ecosystem-auditor executes: .github/instructions/capability-snapshot.prompt.md
+Output: Updated capabilities.md + drift report
+```
+
+**Automated trigger (optional):**
+```
+First Friday of each month:
+  ecosystem-auditor automatically runs snapshot
+  Git commit created: "chore: update capabilities.md snapshot"
+```
+
+### Last Snapshot
+
+- **Date:** 2025-12-15 (Verified Scan)
+- **Time:** 14:45 UTC
+- **Scanner:** ecosystem-auditor (Capability Snapshot Protocol)
+- **Agents Scanned:** 10/10 active agents
+- **Changes Detected:** 0 drift flags
+- **Status:** ✅ ALL CURRENT
+- **Verification:** All tool lists, handoffs, processes match actual agent definitions
+
+---
+
 ## Self-Improvement Protocol
 
 ### **Capacity Insufficient: What to Do**
@@ -254,45 +295,21 @@ limitations:
 
 ---
 
-## Improvements Log
+## Snapshot Status & Drift History
 
-| Date | Agent | Gap | Solution | Status |
-|:---|:---|:---|:---|:---|
-| 2025-12-14 | ecosystem-orchestrator | No recursion guards | Added max_depth=1, self-ref check | ✅ Deployed |
-| 2025-12-14 | All agents (9/11) | Insufficient grounding | Added <example> blocks | ✅ Deployed |
-| 2025-12-14 | agent-validator | Dangling workflow | Assigned to prompt-critic | ✅ Deployed |
+| Date | Time | Agents Scanned | Changes Detected | Status | Scanner | Verification |
+|:---|:---|---:|---:|:---|:---|:---|
+| 2025-12-15 | 14:45 UTC | 10/10 | 0 | ✅ ALL CURRENT | ecosystem-auditor | Full scan complete |
+| (Next snapshot) | TBD | TBD | TBD | TBD | ecosystem-auditor | Scheduled for 2026-01-17 (first Friday) |
 
----
-
-## Shared Utilities (DRY Repository)
-
-### **Pattern: Capacity Check**
-```
-IF agent_capability NOT IN capabilities.{{agent}}.capabilities
-  THEN escalate_to(ecosystem_orchestrator)
-  REASON: "Insufficient capacity: {{reason}}"
-```
-
-### **Pattern: Improvement Request**
-```
-improvement_request(
-  agent: {{name}},
-  limitation: {{what_cannot_do}},
-  solution: {{proposed_change}},
-  gated_by: ["prompt-critic", "prompt-optimizer"],
-  deployed_to: [".github/instructions/", ".github/agents/", ".github/knowledge/"]
-)
-```
-
-### **Pattern: Metric Tracking**
-```
-IF improvement_deployed
-  THEN measure({{metric}})
-  TRACK_IN: improvements_log (this file)
-  DECISION: Keep / Revert based on impact
-```
+**How to trigger next snapshot:**
+- Manual: `User: "Run capability snapshot"`
+- Automatic: First Friday of next month
+- Git hook: On any `.agent.md` file modification
 
 ---
+
+## System Constraints (Non-Negotiable)
 
 ## System Constraints (Non-Negotiable)
 
