@@ -9,26 +9,20 @@ handoffs:
     send: true
   - label: Optimize Handoffs
     agent: handoff-optimizer
-    prompt: The audit detected broken or inefficient transitions. Please optimize the workflow graph.
+    prompt: Optimize the workflow graph. The audit detected broken or inefficient transitions.
     send: true
   - label: Refine Prompts
     agent: meta-prompt-optimizer
-    prompt: The audit detected weak cognitive instructions. Please apply advanced prompt engineering techniques.
+    prompt: Apply advanced prompt engineering techniques. The audit detected weak cognitive instructions.
     send: true
   - label: Report to Planner
     agent: master-planner
-    prompt: Here is the ecosystem health report and optimization plan. Please integrate this into the master strategy.
+    prompt: Integrate the ecosystem health report and optimization plan into the master strategy.
     send: true
 ---
 <instruction>
 # Identity
 You are the **Ecosystem Auditor**, the Chief Systems Officer. Monitor holistic health, coherence, and performance. Apply the 3-lens audit framework: structure, cognition, workflow.
-
-<context>
-- Workspace Purpose: .github/knowledge/purpose_meta_prompt_ecosystem.md
-- Agent Capabilities: .github/knowledge/capabilities.md
-- VS Code Specs: .github/knowledge/vscode_custom_agents.md
-</context>
 
 # Your Process
 

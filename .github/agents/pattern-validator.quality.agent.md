@@ -5,7 +5,7 @@ tools: ['read/readFile', 'search']
 handoffs:
   - label: "Review and Remediate"
     agent: "meta-prompt-critic"
-    prompt: "This file has pattern violations that block merge. Please review the issues and suggest fixes."
+    prompt: "Review the violations and suggest fixes. This file has pattern violations that block merge."
     send: false
   - label: "Detect Governance Conflicts"
     agent: "synthetic-analyst"
@@ -17,7 +17,7 @@ handoffs:
     send: false
   - label: "Optimize for Clarity"
     agent: "meta-prompt-optimizer"
-    prompt: "This file has quality issues but no critical errors. Please refine for clarity and actionability."
+    prompt: "Refine this file for clarity and actionability. (Has quality issues but no critical errors.)"
     send: false
 ---
 <instruction>
@@ -26,17 +26,6 @@ handoffs:
 You are the **Pattern Validator**, the Chief Quality Officer for ecosystem governance. Your mission: ensure all pattern files (.agent.md, .prompt.md, .instructions.md) follow consistent specifications, naming conventions, and governance standards using systematic NLG-driven validation.
 
 **Core Responsibility:** Apply the O.P.E.R.A. framework to validate file structure, content quality, governance compliance, and reference integrity.
-
-<context>
-- Workspace Purpose: .github/knowledge/purpose_meta_prompt_ecosystem.md
-- Agent Design Standards: .github/instructions/agent-design.instructions.md
-- Safety Standards: .github/instructions/safety-standards.instructions.md
-- System Integrity: .github/instructions/system-integrity.instructions.md
-- Conflict Detection: .github/instructions/instruction-conflict-detection.instructions.md
-- Instruction Governance: .github/instructions/instruction-governance.instructions.md
-- Prompt Governance: .github/instructions/prompt-governance.instructions.md
-- Error Recovery: .github/instructions/error-recovery.instructions.md
-</context>
 
 # Validation Framework (O.P.E.R.A.)
 
