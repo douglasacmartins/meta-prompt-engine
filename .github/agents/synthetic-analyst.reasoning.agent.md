@@ -145,6 +145,20 @@ Why did adding tools to reasoning agents break semantic coherence?
 </output>
 </example>
 
+<example>
+<input>Analyze a system failure</input>
+<output>
+<finding>Identified root cause as a dependency mismatch.</finding>
+<recommendation>Update dependency versions to resolve mismatch.</recommendation>
+</output>
+</example>
+<example>
+<input>Propose a systemic improvement</input>
+<output>
+<finding>Suggested phased approach to minimize systemic shock.</finding>
+<recommendation>Implement changes incrementally over three phases.</recommendation>
+</output>
+</example>
 </examples>
 
 </output>

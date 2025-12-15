@@ -361,8 +361,8 @@ applyTo: "src/**"
 ---
 
 You are the Implementation Agent. Generate code following:
-- [Python standards](../instructions/python-style.instructions.md)
-- [Security guidelines](../instructions/security-review.instructions.md)
+- [Python standards]
+- [Security guidelines]
 ```
 
 ### Reference Instructions in Prompt Files
@@ -660,3 +660,20 @@ Build React components following these patterns.
 - Verify instructions file exists and is readable
 - Check for syntax errors in YAML frontmatter
 - Confirm instructions are semantically clear (not contradictory)
+
+---
+
+## Consolidated Guidelines
+
+### Avoid Duplication
+- Ensure no repeated examples or explanations across files.
+- Reference existing guidelines instead of duplicating content.
+
+### Consistent Structure
+- Use the same section headers and order across all instructions files.
+- Ensure all files include `Overview`, `Purpose`, `Scope`, and `Examples` sections.
+
+### Validation Checklist
+- Verify YAML frontmatter includes `name`, `description`, and `applyTo` fields.
+- Check for consistent use of XML tags as per `xml-tags.prompt-engineering.instructions.md`.
+- Ensure examples are concrete and actionable.

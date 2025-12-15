@@ -1,12 +1,12 @@
 ---
 name: XML Tags Best Practices
-description: Enforce consistent XML tag usage for context, formatting, and structural clarity across agents, instructions, and prompts
+description: Enforce consistent XML tag usage for context, formatting, and structural clarity across agents, instructions, and prompts. Establishes organized nested patterns as the standard for all .agent.md files.
 applyTo: ".github/**/*.agent.md,.github/**/*.instructions.md,.github/**/*.prompt.md"
 ---
 
 # XML Tags Best Practices
 
-Structure content with XML tags to improve clarity, accuracy, and parseability of prompts and instructions. This standard ensures consistent tag usage across all customization files.
+Structure content with XML tags to improve clarity, accuracy, and parseability of prompts and instructions. This standard ensures consistent tag usage across all customization files and formalizes organized nested patterns for agent files.
 
 ---
 
@@ -46,41 +46,68 @@ Use these tags for common content types:
 
 | Tag | Purpose | Context |
 |-----|---------|---------|
+| `<instruction>` | Container for entire agent body | Mandatory wrapper for .agent.md files; groups identity, process, and output |
 | `<instructions>` | Explicit directives or rules | How Claude should behave |
 | `<context>` | Background information | Reference material, examples, setup |
+| `<identity>` | Agent role and persona | Self-description at start of agent file |
+| `<process>` | Primary methodology container | Nests thinking, note, constraints; describes approach and reasoning |
+| `<thinking>` | Internal reasoning steps | Chain-of-thought reasoning; used within process stage |
+| `<note>` | Important clarification | Emphasis or warning; often nested in process |
+| `<constraints>` | Multiple constraints | Used with `<constraint>` children; often nested in process |
+| `<constraint>` | Single constraint | Boundary condition or limitation; child of constraints |
+| `<output>` | Results/deliverables container | Nests formatting and examples; describes expected output |
 | `<example>` | Sample input/output pair | Demonstrate expected behavior |
-| `<examples>` | Multiple examples | Used with `<example>` children |
-| `<formatting>` | Output format specifications | Structure, style, layout rules |
-| `<thinking>` | Internal reasoning steps | Chain-of-thought reasoning |
+| `<examples>` | Multiple examples | Used with `<example>` children; nested in output |
+| `<input>` | Example input | Child of example |
+| `<formatting>` | Output format specifications | Structure, style, layout rules; nested in output |
 | `<answer>` | Final response section | Structured conclusion |
-| `<constraint>` | Boundary condition or limitation | What to avoid or restrict |
-| `<constraints>` | Multiple constraints | Used with `<constraint>` children |
 | `<requirement>` | Specific requirement | Must-have specification |
 | `<requirements>` | Multiple requirements | Used with `<requirement>` children |
-| `<note>` | Important clarification | Emphasis or warning |
 | `<definition>` | Term definition | Vocabulary or concept explanation |
+Organized Semantic Nesting (Required for Agents)
 
----
+For agent files (.agent.md), structure content using **organized semantic nesting** with a maximum 3-level hierarchy:
 
-## Part 4: Nesting and Hierarchy
+**Level 1 (Root):** `<instruction>` — Container for entire agent body
+**Level 2 (Primary):** `<process>` and `<output>` — Semantic containers
+**Level 3 (Leaf):** Specific tags like `<thinking>`, `<note>`, `<constraints>`, `<formatting>`, `<examples>`
+
+```xml
+<instruction>
+  <identity>Agent role and persona</identity>
+  
+  <process>
+    <thinking>Reasoning steps and methodology</thinking>
+    <note>Important clarifications</note>
+    <constraints>...</constraints>
+  </process>
+
+  <output>
+    <formatting>Output structure specifications</formatting>
+    <examples>
+      <example>
+        <input>Sample input</input>
+        <output>Expected output</output>
+      </example>
+    </examples>
+  </output>
+</instruction>
+```
 
 ### Nesting Rules
 
-Structure content hierarchically using nested tags:
-
-```xml
-<examples>
-  <example>
-    <input>User request</input>
-    <output>Expected response</output>
-  </example>
-</examples>
-```
-
 **DO:**
+- Use 3-level organized nesting for agents: root → containers → leaf tags
 - Nest tags for logical grouping
 - Use plural tags (`<examples>`) as containers for singular children (`<example>`)
-- Place related content together
+- Place related content together within semantic containers
+- Distinguish between "unorganized nesting" (forbidden) and "organized semantic nesting" (required)
+
+**DON'T:**
+- Nest excessively (limit to 3 levels in organized structures)
+- Use plural wrappers for single items
+- Interrupt hierarchies with unrelated content
+- Use flat structures without semantic containers for agent files
 
 **DON'T:**
 - Nest excessively (limit to 3 levels)
@@ -201,17 +228,329 @@ Return code in a fenced code block with language specified.
 
 ---
 
+## Part 8: Organized Nesting Pattern for Agents
+
+### 3-Level Hierarchy for Agent Files
+
+All .agent.md files MUST follow the organized nested pattern with exactly 3 semantic levels:
+
+```
+<instruction>                           ← Level 1: Root container for entire agent
+  ├─ <identity>                         ← Agent role/persona
+  ├─ <process>                          ← Level 2: Methodology container
+  │   ├─ <thinking>                     ← Level 3: Internal reasoning
+  │   ├─ <note>                         ← Level 3: Clarifications
+  │   └─ <constraints>                  ← Level 3: Limitations
+  └─ <output>                           ← Level 2: Results container
+      ├─ <formatting>                   ← Level 3: Output specification
+      └─ <examples>                     ← Level 3: Example container
+          └─ <example>                  ← (Level 4 only for plural children)
+              ├─ <input>                ← Input of example
+              └─ <output>               ← Output of example
+```
+
+### Purpose of Each Wrapper
+
+| Wrapper | Purpose | Contains |
+|---------|---------|----------|
+| `<instruction>` | Container for entire agent body | Everything: identity, process, output |
+| `<process>` | Agent methodology and reasoning approach | How the agent thinks and operates |
+| `<output>` | Expected results and deliverables | What the agent produces |
+
+### When to Use `<thinking>`
+
+Use `<thinking>` tags INSIDE `<process>` to document:
+- **Chain-of-thought reasoning** — Multi-step logical sequences
+- **Methodology stages** — Formal processes (RADD, OPERA, etc.)
+- **Internal decision-making** — How the agent evaluates options
+- **Reasoning frameworks** — Structured approaches to problems
+
+Example:
+```xml
+<process>
+<thinking>
+**Stage 1: Research** — Gather facts
+**Stage 2: Hypothesis** — Form theories
+**Stage 3: Analysis** — Evaluate evidence
+</thinking>
+</process>
+```
+
+### When to Use `<note>` and `<constraints>` in `<process>`
+
+**`<note>` inside `<process>`:**
+- Clarifications about the methodology
+- Important caveats about how the agent operates
+- Emphasis on agent behavioral boundaries
+
+Example:
+```xml
+<note>Pure reasoning only: You do NOT retrieve data yourself</note>
+```
+
+**`<constraints>` inside `<process>`:**
+- Hard limitations on the agent's scope
+- Behavioral boundaries
+- Performance or safety constraints
+
+Example:
+```xml
+<constraints>
+- Logical rigor: Every conclusion must trace back to premises
+- Depth limit: Max 4 RADD stages per request
+</constraints>
+```
+
+---
+
+## Part 9: Agent Template Structure
+
+### Complete Template for Agent Files
+
+Use this template as the standard structure for all .agent.md files:
+
+```xml
+<instruction>
+
+<identity>
+You are the **[AGENT_NAME]**, [brief description of role and primary function].
+</identity>
+
+<process>
+
+<thinking>
+[Describe the agent's reasoning methodology, stages, or decision-making framework]
+
+**Stage 1:** [First step in the process]
+- [Details]
+
+**Stage 2:** [Second step]
+- [Details]
+</thinking>
+
+<note>
+[Important clarifications about the agent's approach, scope limitations, or behavioral boundaries]
+</note>
+
+<constraints>
+- [Hard constraint 1]
+- [Hard constraint 2]
+- [Hard constraint 3]
+</constraints>
+
+</process>
+
+<output>
+
+<formatting>
+[Specify the structure and format of the agent's output]
+- [Format detail 1]
+- [Format detail 2]
+</formatting>
+
+<examples>
+<example>
+<input>Example user request or scenario</input>
+<output>Expected agent response showing format and content</output>
+</example>
+
+<example>
+<input>Another example input</input>
+<output>Another example output</output>
+</example>
+</examples>
+
+</output>
+
+</instruction>
+```
+
+### Location of Each Standard Tag
+
+- **`<identity>`** — FIRST tag after `<instruction>`, before `<process>`
+- **`<process>`** — First primary container, contains methodology
+- **`<thinking>`** — FIRST child of `<process>`, describes reasoning
+- **`<note>`** — AFTER `<thinking>` in `<process>`, contains clarifications
+- **`<constraints>`** — LAST child of `<process>`, contains limitations
+- **`<output>`** — Second primary container, after `<process>`
+- **`<formatting>`** — FIRST child of `<output>`, specifies output structure
+- **`<examples>`** — LAST child of `<output>`, contains example pairs
+
+### Where Identity Text Goes
+
+The `<identity>` tag appears immediately after the opening `<instruction>` tag. It contains:
+- Agent name (bold)
+- One-line description of the agent's role
+- Brief statement of primary function or methodology
+
+```xml
+<instruction>
+
+<identity>
+You are the **[NAME]**, [concise role and purpose description].
+</identity>
+```
+
+### How `<thinking>` Fits Into the Process Stage
+
+`<thinking>` is the FIRST tag within `<process>` and documents:
+- How the agent approaches problems
+- Formal methodologies used (RADD, OPERA, etc.)
+- Stage-by-stage breakdown of the thinking process
+- Decision-making frameworks
+
+It uses nested formatting (bullet points, bold headers) for readability but does NOT introduce additional XML tags. The `<thinking>` tag itself is a leaf node.
+
+---
+
+## Part 10: Anti-Patterns to Avoid
+
+### Pattern 1: Flat Structure Without Wrappers (❌ OLD - FORBIDDEN)
+
+**Problem:** Tags at same level without semantic grouping
+
+```xml
+<instructions>Your methodology here</instructions>
+<thinking>Your reasoning here</thinking>
+<formatting>Output format here</formatting>
+<examples>...</examples>
+```
+
+**Why it fails:**
+- No semantic grouping
+- Unclear relationship between sections
+- Difficult to parse or modify
+- Violates organized nesting standard
+
+**Corrected:**
+```xml
+<instruction>
+  <identity>Agent role</identity>
+  
+  <process>
+    <thinking>Reasoning methodology</thinking>
+  </process>
+  
+  <output>
+    <formatting>Output format</formatting>
+    <examples>...</examples>
+  </output>
+</instruction>
+```
+
+### Pattern 2: Excessive Nesting Beyond 3 Levels (❌ FORBIDDEN)
+
+**Problem:** Tags nested too deeply with redundant wrappers
+
+```xml
+<instruction>
+  <agent>
+    <identity>
+      <name>Agent Name</name>
+      <description>Description</description>
+    </identity>
+  </agent>
+</instruction>
+```
+
+**Why it fails:**
+- Excessive wrappers reduce readability
+- Violates 3-level maximum hierarchy rule
+- Creates unnecessary complexity
+
+**Corrected:**
+```xml
+<instruction>
+  <identity>Agent Name — Description</identity>
+  
+  <process>
+    <thinking>Reasoning methodology</thinking>
+  </process>
+  
+  <output>
+    <formatting>Output structure</formatting>
+  </output>
+</instruction>
+```
+
+### Pattern 3: Orphaned Tags Outside Semantic Containers (❌ FORBIDDEN)
+
+**Problem:** Tags placed outside `<process>` and `<output>` containers
+
+```xml
+<instruction>
+  <identity>Agent role</identity>
+  
+  <thinking>Orphaned tag — should be in process</thinking>
+  <constraints>Should be in process</constraints>
+  
+  <formatting>Should be in output</formatting>
+</instruction>
+```
+
+**Why it fails:**
+- Breaks semantic organization
+- Unclear which tags belong to process vs. output
+- Violates 3-level structure
+
+**Corrected:**
+```xml
+<instruction>
+  <identity>Agent role</identity>
+  
+  <process>
+    <thinking>Reasoning methodology</thinking>
+    <constraints>Limitations</constraints>
+  </process>
+  
+  <output>
+    <formatting>Output structure</formatting>
+  </output>
+</instruction>
+```
+
+---
+
+## Organized Nesting Pattern: Reference Implementation
+
+The reasoner.reasoning.agent.md file demonstrates the correct organized nesting pattern for agent files. **This is the REQUIRED pattern for all .agent.md files going forward.**
+
+---
+
 ## Compliance Checklist
 
-Before committing, verify:
+Before committing any .agent.md file, verify:
 
+### Structure Validation
+- [ ] `<instruction>` wrapper present (mandatory for agent files)
+- [ ] `<identity>` tag present immediately after `<instruction>`
+- [ ] Two primary containers present: `<process>` and `<output>`
+- [ ] All process content nested inside `<process>`
+- [ ] All output content nested inside `<output>`
+
+### Nesting Hierarchy
+- [ ] Maximum 3 levels of nesting maintained (instruction → container → leaf)
+- [ ] No orphaned tags outside `<process>` and `<output>`
+- [ ] Plural wrappers (`<examples>`, `<constraints>`) contain singular children
+- [ ] No excessive nesting beyond semantic boundaries
+
+### Tag Consistency
 - [ ] All tags use lowercase with hyphens
 - [ ] Tag names are descriptive and semantic
 - [ ] Tag names are consistent throughout the file
-- [ ] Tags are referenced by name in instructions
 - [ ] No empty tags exist
-- [ ] Nesting is logical and shallow (≤3 levels)
-- [ ] Plural tags contain singular children when appropriate
 - [ ] Content within tags is relevant and focused
+
+### Process Stage
+- [ ] `<thinking>` is first child of `<process>`
+- [ ] `<note>` appears after `<thinking>` (if present)
+- [ ] `<constraints>` is last child of `<process>`
+- [ ] Methodology is clearly documented in `<thinking>`
+
+### Output Stage
+- [ ] `<formatting>` is first child of `<output>`
+- [ ] `<examples>` is last child of `<output>`
+- [ ] Examples follow input→output pattern
+- [ ] Output structure is clearly specified
 
 ---

@@ -2,7 +2,7 @@
 name: Optimize Instructions System
 description: Audit instructions files for completeness, consistency, and effectiveness
 argument-hint: "Analyze instruction files for optimization opportunities"
-agent: ask
+agent: master-planner
 ---
 
 # Optimize Instructions System
@@ -43,6 +43,27 @@ Review all instructions files in `.github/instructions/`:
 - Are examples concrete and actionable?
 - Do guidelines avoid vague language?
 - Are constraints explicit ("Do NOT...", not "Avoid...")?
+
+## Validation Checklist
+
+- **Completeness:**
+  - Are all required frontmatter fields documented?
+  - Do all design files have compliance checklists?
+  - Are examples provided for complex concepts?
+
+- **Consistency:**
+  - Do all files follow imperative, direct communication style?
+  - Are naming conventions applied consistently?
+  - Do all files use consistent section structure?
+
+- **Clarity:**
+  - Are sections clearly organized with logical hierarchy?
+  - Are examples concrete and actionable?
+  - Do guidelines avoid vague language?
+
+- **Duplication:**
+  - Are there any repeated examples or explanations across files?
+  - Do any two files cover the same topic redundantly?
 
 ## Output Format
 

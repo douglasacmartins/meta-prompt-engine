@@ -155,11 +155,4 @@ Organize recommendations by priority:
 
 ## Context
 
-All applicable instruction files are located in `.github/instructions/`:
-- [agent.design.instructions.md](.github/instructions/agent.design.instructions.md)
-- [communication-style.vscode.instructions.md](.github/instructions/communication-style.vscode.instructions.md)
-- [design-standards.design.instructions.md](.github/instructions/design-standards.design.instructions.md)
-- [file-naming-convention.vscode.instructions.md](.github/instructions/file-naming-convention.vscode.instructions.md)
-- [instructions.design.instructions.md](.github/instructions/instructions.design.instructions.md)
-- [prompt.design.instructions.md](.github/instructions/prompt.design.instructions.md)
-- [xml-tags.prompt-engineering.instructions.md](.github/instructions/xml-tags.prompt-engineering.instructions.md)
+All applicable instruction files are located in `.github/instructions/*.instructions.md`. Use their `applyTo` patterns to determine relevance.
