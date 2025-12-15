@@ -2,9 +2,14 @@
 name: Agent Design Standards
 description: Guidelines for designing, scaffolding, and architecting new agents and prompts
 applyTo: "**/*.agent.md"
+version: 2.0.0
+framework: "Meta-Prompt Agent Generation Framework (MPAGF)"
+layer: "Layer 1 - Foundation Instructions"
 ---
 
-# Agent Architecture Principles
+# Agent Architecture Principles (MPAGF Layer 1)
+
+**Framework Integration:** This instruction file operates as Layer 1 (Foundation) of the Meta-Prompt Agent Generation Framework, providing core architectural principles that all agents inherit automatically.
 
 Every agent must follow this design pattern:
 
@@ -28,10 +33,14 @@ Pattern:
 ```
 <instruction>
 # Identity
+You are **{{agent_name}}**, the {{role_description}}.
 [2-3 lines of clear persona]
 
-# Your Unique Process
-[Agent-specific methodology, 10-15 lines]
+# Your Process (O.P.E.R.A.)
+1. **Observe**: [Specific observation task]
+2. **Think**: [Specific reasoning task]
+3. **Act**: [Specific execution task]
+4. **Verify**: [Specific validation task]
 
 # References
 - Reasoning: reasoning-framework.instructions.md
@@ -76,8 +85,9 @@ Pattern:
 ```xml
 <example>
 **Input:** [Realistic scenario matching agent domain]
+**Thought:** [Chain of Thought reasoning step-by-step]
 **Output:** [Concrete agent response/action]
-**Logic:** [1-2 sentence explanation]
+**Logic:** [1-2 sentence explanation of why this output is correct]
 </example>
 ```
 
@@ -106,7 +116,7 @@ Determine which type of agent you're building:
 - Output: Diagnoses, findings, root causes
 
 ## Type 3: Design Agent
-**Examples:** prompt-architect, meta-prompter
+**Examples:** meta-prompt-architect, meta-prompter
 
 **Characteristics:**
 - Creates new artifacts (agents, prompts, structures)
@@ -114,7 +124,7 @@ Determine which type of agent you're building:
 - Output: Code blocks, templates, structured files
 
 ## Type 4: Refinement Agent
-**Examples:** prompt-critic, prompt-optimizer
+**Examples:** meta-prompt-critic, meta-prompt-optimizer
 
 **Characteristics:**
 - Audits or polishes work
@@ -140,7 +150,7 @@ Determine which type of agent you're building:
 1. **Target must exist:** Never create handoff to non-existent agent
 2. **Clear intent:** Label and prompt clearly state why handoff is needed
 3. **No circular loops:** Agent A → B → C, but never back to A
-4. **Termination:** Always handoff to a gatekeeper (prompt-critic) or planner (master-planner) when done
+4. **Termination:** Always handoff to a gatekeeper (meta-prompt-critic) or planner (master-planner) when done
 
 ## Handoff Pattern
 
@@ -148,7 +158,10 @@ Determine which type of agent you're building:
 handoffs:
   - label: [Action/Next Step]
     agent: [target-agent]
-    prompt: [Context for target agent, include what was done and what to do next]
+    prompt: |
+      Context: [What has been done]
+      Task: [What needs to be done]
+      Constraints: [Any specific limitations]
     send: [true if immediate, false if optional]
 ```
 
@@ -157,7 +170,7 @@ handoffs:
 ```yaml
 handoffs:
   - label: Audit for Safety
-    agent: prompt-critic
+    agent: meta-prompt-critic
     prompt: Please audit this agent design for safety, logic, and compliance violations.
     send: true
   

@@ -12,7 +12,7 @@ handoffs:
     prompt: The audit detected broken or inefficient transitions. Please optimize the workflow graph.
     send: true
   - label: Refine Prompts
-    agent: prompt-optimizer
+    agent: meta-prompt-optimizer
     prompt: The audit detected weak cognitive instructions. Please apply advanced prompt engineering techniques.
     send: true
   - label: Report to Planner
@@ -44,7 +44,7 @@ You are the **Ecosystem Auditor**, the Chief Systems Officer. Monitor holistic h
 
 AGENT-SPECIFIC:
 - Lens scope: .agent.md and .instructions.md files only
-- Delegation: Use 4 handoffs (synthetic-analyst for deep analysis, handoff-optimizer for repairs, prompt-optimizer for refine, master-planner for integration)
+- Delegation: Use 4 handoffs (synthetic-analyst for deep analysis, handoff-optimizer for repairs, meta-prompt-optimizer for refine, master-planner for integration)
 - Report format: Use | Metric | Status | Findings | table with 🟢/🟡/🔴 indicators
 </constraints>
 
@@ -56,7 +56,7 @@ AGENT-SPECIFIC:
 - Workflow: ✅ Orchestrator routes to 7 specialists, no dead-ends
 **Top 3 Recommendations:**
 1. Complete refactoring of 2 legacy agents (synthetic-analyst, reasoner)
-2. Add example blocks to prompt-critic and handoff-optimizer
+2. Add example blocks to meta-prompt-critic and handoff-optimizer
 3. Integrate system-integrity.instructions.md validation into continuous audit
 **Output:** Full health report with execution plan
 </example>

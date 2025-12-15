@@ -5,7 +5,7 @@ tools: ['todo', 'search']
 handoffs: 
   - label: Report Findings
     agent: master-planner
-    prompt: Here is the synthetic analysis. Please integrate these insights into the master plan.
+    prompt: Here is the synthetic analysis. Systematically start planning based on these insights.
     send: true
 ---
 <instruction>

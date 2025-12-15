@@ -2,6 +2,9 @@
 name: Prompt Engineering Standards
 description: Techniques for optimizing cognition, clarity, and few-shot grounding in prompts
 applyTo: "**/*.agent.md"
+version: "2.0.0"
+last_updated: "2025-12-15"
+enhancement: "Added Tree of Thoughts, Chain of Verification, Constitutional AI, and Advanced Meta-Cognitive Patterns"
 ---
 
 # Cognitive Optimization Techniques
@@ -39,6 +42,36 @@ Let's think step by step.
 ```
 
 **Effect:** Grounds LLM behavior by 15-25%, improves coherence.
+
+### Enhanced Example Patterns
+
+**Multi-Modal Examples:**
+```xml
+<example type="reasoning">
+**Input:** Complex logical problem
+**Process:** [step-by-step reasoning shown]
+**Output:** [conclusion with rationale]
+**Meta-Learning:** This example demonstrates [pattern/principle]
+</example>
+
+<example type="safety">
+**Input:** Potentially risky request  
+**Process:** [constitutional checking shown]
+**Output:** [safe alternative provided]
+**Meta-Learning:** Shows safety-first reasoning pattern
+</example>
+```
+
+**Anti-Example Pattern:**
+```xml
+<anti-example>
+**Input:** [scenario]
+**Wrong Approach:** [what not to do]
+**Why Wrong:** [reasoning]
+**Right Approach:** [correct method]
+**Learning:** [principle illustrated]
+</anti-example>
+```
 
 ## 3. Maieutic Prompting
 
@@ -93,6 +126,119 @@ Consider three approaches:
 - Approach C (Data-Driven): [description]
 
 Which approach best solves the problem? Why?
+```
+
+## 7. Tree of Thoughts
+
+**Rule:** For complex problems, systematically explore multiple reasoning paths in the prompt.
+
+**Pattern:**
+```
+Let me explore this systematically:
+
+**Path 1 (Conservative):** [safe, proven approach]
+- Reasoning: [why this works]
+- Risks: [what could go wrong]
+- Outcome: [expected result]
+
+**Path 2 (Innovative):** [creative approach] 
+- Reasoning: [why this could work]
+- Risks: [what could go wrong]
+- Outcome: [expected result]
+
+**Path 3 (Systematic):** [methodical approach]
+- Reasoning: [step-by-step logic]
+- Risks: [what could go wrong] 
+- Outcome: [expected result]
+
+**Selection:** Based on constraints and context, Path X is optimal because [rationale].
+```
+
+**Effect:** Forces systematic exploration before conclusion.
+
+## 8. Chain of Verification
+
+**Rule:** Build verification steps directly into reasoning process.
+
+**Pattern:**
+```
+**Initial Response:** [first answer]
+
+**Verification Check:**
+1. **Logic Check:** Does this reasoning hold up?
+2. **Fact Check:** Are the premises correct?
+3. **Constraint Check:** Does this violate any rules?
+4. **Completeness Check:** What am I missing?
+
+**Verified Response:** [corrected/confirmed answer]
+**Confidence:** [High/Medium/Low] based on verification results
+```
+
+**Effect:** Reduces errors through self-correction.
+
+## 9. Constitutional AI Patterns
+
+**Rule:** Embed safety and ethical reasoning directly in prompt flow.
+
+**Pattern:**
+```
+Before proceeding with this request:
+
+**Constitutional Check:**
+- **Safety:** Will this cause harm? [Yes/No + reasoning]
+- **Truth:** Is this factually grounded? [Yes/No + reasoning] 
+- **Help:** Does this serve legitimate needs? [Yes/No + reasoning]
+- **Privacy:** Does this protect sensitive data? [Yes/No + reasoning]
+
+**Proceed only if all checks pass. If any fail, explain and offer alternative.**
+```
+
+**Effect:** Embeds ethical reasoning in cognitive process.
+
+---
+
+# Advanced Meta-Cognitive Patterns
+
+## 1. Recursive Reasoning
+
+**Rule:** Apply reasoning about reasoning.
+
+**Pattern:**
+```
+**First-Order Question:** [the actual question]
+**Meta-Question:** What type of reasoning does this require?
+**Reasoning Strategy:** Based on question type, I should use [framework/approach]
+**Execution:** [apply the chosen reasoning strategy]
+**Meta-Reflection:** Did my reasoning strategy work effectively?
+```
+
+## 2. Perspective Integration
+
+**Rule:** Systematically consider multiple viewpoints.
+
+**Pattern:**
+```
+**Stakeholder Analysis:**
+- User perspective: [what user needs/wants]
+- System perspective: [what system requires]  
+- Safety perspective: [what safety demands]
+- Context perspective: [what situation requires]
+
+**Synthesis:** Balancing these perspectives, the optimal approach is [solution].
+```
+
+## 3. Uncertainty Quantification
+
+**Rule:** Explicitly acknowledge and work with uncertainty.
+
+**Pattern:**
+```
+**High Confidence:** [areas where I'm certain]
+**Medium Confidence:** [areas with some uncertainty] 
+**Low Confidence:** [areas where I'm unsure]
+**Unknown:** [areas where I lack information]
+
+**Decision Framework:** Given this uncertainty profile, I recommend [action] because [reasoning].
 ```
 
 ---

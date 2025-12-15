@@ -12,18 +12,30 @@ Quick start
  - The repository's agents are located at [.github/agents](.github/agents).
  - To use an agent: open the Chat view in VS Code, select Configure Custom Agents → Create or choose an agent. VS Code auto-detects `.agent.md` files in `.github/agents`.
 
-## Available Agents
+## Meta-Prompt Agent Generation Framework (MPAGF)
 
-| Agent | Role | Description |
+The system operates as a comprehensive framework for generating flawless AI agents through structured layers:
+
+### **Framework Architecture**
+- **Layer 0:** Meta-Governance (rules for writing rules)
+- **Layer 1:** Foundation Instructions (core principles)  
+- **Layer 2:** Specialized Instructions (domain expertise)
+- **Layer 3:** Generation Templates (reusable prompts)
+- **Layer 4:** Agent Ecosystem (specialized implementations)
+
+### **Available Agents**
+
+| Agent | Framework Role | Description |
 |-------|------|-------------|
-| `@master-planner` | **The Architect** | The central hub for planning and orchestration. Uses the O.P.E.R.A. framework. |
-| `@reasoner` | **The Logic Engine** | Verifies logic using deductive reasoning and formal proofs. |
-| `@synthetic-analyst` | **The Researcher** | Performs deep systemic analysis and research. |
-| `@prompt-architect` | **The Builder** | Designs and scaffolds new agents and prompts. |
-| `@prompt-critic` | **The Auditor** | Reviews drafts for safety, logic, and compliance. |
-| `@prompt-optimizer` | **The Polisher** | Refines prompts for maximum performance. |
-| `@meta-prompter` | **The Structural Engine** | Solves problems using abstract syntax and meta-prompting techniques. |
-| `@handoff-optimizer` | **The Workflow Specialist** | Optimizes the connections between agents. |
+| `@master-planner` | **System Orchestrator** | Strategic planning and multi-agent composition using O.P.E.R.A. framework |
+| `@meta-specialist-factory` | **Agent Generator** | Creates specialized agents for novel domains via MPAGF pipeline |
+| `@meta-prompt-critic` | **Quality Gate** | 5-layer validation pipeline ensuring flawless agent generation |
+| `@meta-prompt-architect` | **Component Designer** | Designs framework components (agents, prompts, instructions) |
+| `@meta-prompt-optimizer` | **Performance Enhancer** | Optimizes prompts and agents for maximum effectiveness |
+| `@meta-prompter` | **Structure Engine** | Defines abstract syntax and structural requirements |
+| `@ecosystem-orchestrator` | **Router** | Intelligent delegation and workflow management |
+| `@synthetic-analyst` | **Deep Analysis** | Systemic analysis and research using hermeneutic cycles |
+| `@reasoner` | **Logic Validation** | Deductive reasoning and formal verification |
 
 Add a new agent
  - Create a Markdown file with the `.agent.md` extension and place it in `.github/agents/`.

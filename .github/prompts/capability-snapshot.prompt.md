@@ -1,5 +1,6 @@
 ---
-name: "Capability Snapshot Executor"
+name: start-capability-snapshot
+model: Gemini 3 Pro (Preview) (copilot)
 description: "Executable prompt to scan all agents and update capabilities.md with current system state"
 ---
 

@@ -2,9 +2,12 @@
 name: System Integrity Standards
 description: DRY principle enforcement, handoff validation, and ecosystem coherence
 applyTo: "**/*.agent.md"
+version: 2.0.0
+framework: "Meta-Prompt Agent Generation Framework (MPAGF)"
+layer: "Layer 1 - Foundation Instructions"
 ---
 
-# DRY Principle (Don't Repeat Yourself)
+# DRY Principle (MPAGF Layer 1 - Don't Repeat Yourself)
 
 **The Golden Rule:** No constraint, context, pattern, or methodology should be duplicated across agents.
 
@@ -319,10 +322,150 @@ When the ecosystem needs enhancement:
 
 ---
 
+# Performance & Efficiency Standards
+
+Agents must operate efficiently within resource constraints. This section defines performance targets and optimization patterns.
+
+---
+
+## Token Budget Guidelines
+
+Each agent type has a target token budget for typical operations. Plan your tool usage and output size accordingly:
+
+| Agent Type | Context Budget | Instruction | Output Limit | Total Target |
+|:---|---:|---:|---:|---:|
+| **Planning Agents** (master-planner, orchestrator) | 2K | 1K | 5K | 8-10K |
+| **Analysis Agents** (reasoner, synthetic-analyst) | 2K | 1K | 4K | 6-8K |
+| **Design Agents** (prompt-architect, meta-prompter) | 1.5K | 0.8K | 3.5K | 5-7K |
+| **Refinement Agents** (critic, optimizer) | 1.5K | 0.8K | 3K | 4-6K |
+| **Utility Agents** (handoff-optimizer, auditor) | 1.5K | 0.8K | 2.5K | 4-5K |
+
+**How to stay within budget:**
+
+- Batch independent tool calls (parallel execution saves round-trips)
+- Read files once with large ranges (not multiple small reads)
+- Summarize intermediate results before handoff
+- Use grep_search instead of semantic_search when pattern matching is enough
+- Limit output to essential information only
+
+---
+
+## Parallel Execution Patterns
+
+When tool calls don't depend on each other, execute them in parallel (same function_calls block).
+
+**Performance Impact:**
+- Sequential (5 read_file calls): ~5 seconds
+- Parallel (5 read_file calls): ~1 second
+- **Savings: 4 seconds per operation**
+
+**When to batch:**
+- Multiple `read_file` calls to different files ✅
+- Multiple `grep_search` calls to different queries ✅
+- `semantic_search` + `list_dir` together ✅
+
+**When NOT to batch:**
+- Tool A's output feeds into Tool B (dependent) ❌
+- Result of search determines next read ❌
+- Edit operation depends on read contents ❌
+
+**Pattern:**
+```
+<function_calls>
+  <invoke name="tool1">...</invoke>
+  <invoke name="tool2">...</invoke>
+  <invoke name="tool3">...</invoke>
+</function_calls>
+```
+
+Result: 3x faster than sequential.
+
+---
+
+## Query Optimization
+
+Choose the right tool and optimize queries to minimize cost:
+
+### semantic_search (Expensive)
+- Cost: Slowest, highest token consumption
+- Use: Understanding context, finding related concepts
+- Optimization: Combine multiple queries into one broad search
+
+❌ Bad: `semantic_search("agent design")`, `semantic_search("specialization")`, `semantic_search("classification")`  
+✅ Good: `semantic_search("agent design, specialization, classification")`
+
+### grep_search (Medium Cost)
+- Cost: Fast, pattern-based
+- Use: Finding specific keywords, function names
+- Optimization: Use regex to narrow results upfront
+
+❌ Bad: `grep_search("function")`  
+✅ Good: `grep_search("^export function", isRegexp=true)`
+
+### file_search (Fast)
+- Cost: Instant, glob-based
+- Use: Finding files by name/pattern
+- Optimization: Use specific patterns, not wildcards
+
+❌ Bad: `file_search("*")`  
+✅ Good: `file_search("**/*.agent.md")`
+
+### read_file (Balanced)
+- Cost: Fast, but token cost = file size
+- Use: When you need exact contents
+- Optimization: Read large sections once, not many small reads
+
+❌ Bad: Read lines 1-50, then 50-100, then 100-150  
+✅ Good: Read lines 1-150 in single call
+
+---
+
+## Output Size Management
+
+Manage output size to stay within token budgets:
+
+**Handoff Output:**
+- Keep handoff context to essential information only
+- Summarize findings before routing to next agent
+- Example: "Found 12 matches, 3 are critical, here they are..."
+
+**Large Results Handling:**
+- If output exceeds 3K tokens, summarize instead of listing all
+- Offer to provide details in follow-up if needed
+- Chunk large operations: Split 100 reads into 20 reads per handoff
+
+**Example Summarization:**
+```
+❌ Bad (3K tokens, excessive detail):
+"Found these 50 agents with detailed info on each..."
+
+✅ Good (200 tokens, actionable summary):
+"Found 50 agents. 3 require immediate fixes: A (xyz), B (abc), C (def). 
+Details available on request."
+```
+
+---
+
+## Performance Checklist
+
+Before executing agent operations:
+
+- [ ] Tool calls batched where independent (parallel not sequential)
+- [ ] Query patterns optimized (right tool for job)
+- [ ] Output summarized before handoff (not overwhelming detail)
+- [ ] Token budget estimated pre-execution
+- [ ] Large operations chunked if exceeding limits
+- [ ] Parallel read_file used instead of sequential reads
+- [ ] Fallback tools identified if primary is expensive
+
+---
+
 # Reference
 
 - **Reasoning:** reasoning-framework.instructions.md
 - **Safety:** safety-standards.instructions.md
 - **Design:** agent-design.instructions.md
 - **Optimization:** prompt-engineering.instructions.md
+- **Tool Usage:** tool-integration.instructions.md
+- **Error Handling:** error-recovery.instructions.md
 - **Capabilities:** .github/knowledge/capabilities.md

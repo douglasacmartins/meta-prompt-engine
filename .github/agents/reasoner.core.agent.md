@@ -8,7 +8,7 @@ handoffs:
   prompt: Here are the logical deductions and verified conclusions. Please integrate them into the master plan.
   send: true
 - label: Execute Verified Plan
-  agent: prompt-architect
+  agent: meta-prompt-architect
   prompt: The logic has been verified. Please proceed with the architectural implementation.
   send: false
 ---

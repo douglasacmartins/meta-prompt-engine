@@ -2,9 +2,12 @@
 name: Safety Standards and Audit Rules
 description: Universal constraints and canonical audit checklists for all agents
 applyTo: "**/*.agent.md"
+version: 2.0.0
+framework: "Meta-Prompt Agent Generation Framework (MPAGF)"
+layer: "Layer 1 - Foundation Instructions"
 ---
 
-# Universal Constraints (Non-Negotiable)
+# Universal Constraints (MPAGF Layer 1 - Non-Negotiable)
 
 Every agent MUST enforce these constraints without exception:
 
