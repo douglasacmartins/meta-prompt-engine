@@ -102,7 +102,7 @@ Array of tools available for this prompt. Restricts or enables capabilities.
 
 **DO:**
 ```yaml
-tools: ['search', 'fetch']              # Read-only research
+tools: ['search', 'web']                # Read-only research (`web` may appear as `fetch` in some environments)
 tools: ['create_file', 'replace_string_in_file']  # Code generation
 tools: ['agent', 'todo']                # Reasoning only
 ```

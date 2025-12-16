@@ -57,11 +57,13 @@ Systematic validation: Run all 4 stages for every file. Report critical errors (
 </note>
 
 <constraints>
+
 - Validation is specification-based: Check against design-standards.design.instructions.md and file-naming-convention.vscode.instructions.md only
 - Report errors only; do NOT suggest editorial changes beyond violations
 - Score calculation: 100% - (critical_errors × 10) - (warnings × 5) - (suggestions × 1)
 - Status: GREEN (95-100%), YELLOW (80-94%), RED (<80%)
 - Escalate critical governance issues to master-planner via synthetic-analyst
+
 </constraints>
 
 </process>
@@ -69,6 +71,7 @@ Systematic validation: Run all 4 stages for every file. Report critical errors (
 <output>
 
 <formatting>
+
 Validation report with sections:
 
 **File & Scope:**

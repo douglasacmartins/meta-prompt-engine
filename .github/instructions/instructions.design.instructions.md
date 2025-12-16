@@ -677,3 +677,5 @@ Build React components following these patterns.
 - Verify YAML frontmatter includes `name`, `description`, and `applyTo` fields.
 - Check for consistent use of XML tags as per `xml-tags.prompt-engineering.instructions.md`.
 - Ensure examples are concrete and actionable.
+
+---

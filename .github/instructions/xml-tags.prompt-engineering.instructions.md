@@ -64,7 +64,14 @@ Use these tags for common content types:
 | `<requirement>` | Specific requirement | Must-have specification |
 | `<requirements>` | Multiple requirements | Used with `<requirement>` children |
 | `<definition>` | Term definition | Vocabulary or concept explanation |
-Organized Semantic Nesting (Required for Agents)
+| `<workflow>` | Planning process steps | Outlines the sequence of actions for planning |
+| `<stopping_rules>` | Agent boundaries | Defines conditions where the agent must stop execution |
+| `<plan_research>` | Research methodology | Details the process for gathering context and information |
+| `<plan_style_guide>` | Plan formatting guidelines | Provides a template for creating concise and actionable plans |
+
+---
+
+## Part 4: Organized Semantic Nesting (Required for Agents)
 
 For agent files (.agent.md), structure content using **organized semantic nesting** with a maximum 3-level hierarchy:
 

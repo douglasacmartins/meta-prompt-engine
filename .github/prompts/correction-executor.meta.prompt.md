@@ -58,6 +58,7 @@ Planning mode only—generate step-by-step executable plans, not implementation 
 - Specificity: Include exact line numbers, code snippets, replacement text
 - Validation: Each step includes acceptance criterion (how to verify correct)
 - Terminology: Use master plan vocabulary (Critical Errors, Warnings, Suggestions, Jaccard, phrase extraction, escalation)
+
 </constraints>
 
 </process>

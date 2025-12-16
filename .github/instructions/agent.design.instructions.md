@@ -305,7 +305,7 @@ Restrict tools to agent's scope. Tools define capabilities and constraints.
 
 **Read-Only Tools:**
 ```yaml
-tools: ['search', 'fetch', 'usages', 'githubRepo']
+tools: ['search', 'web', 'usages', 'githubRepo']
 ```
 Use for: Planning, analysis, review agents.
 
@@ -323,7 +323,7 @@ Use for: Implementation, code generation agents.
 
 **Mixed Toolset (Specialized):**
 ```yaml
-tools: ['search', 'fetch', 'agent', 'create_file']
+tools: ['search', 'web', 'agent', 'create_file']
 ```
 Use for: Research + implementation agents.
 
@@ -516,7 +516,8 @@ Verify agent file before committing:
 | Tool | Purpose | Read-Only? |
 |------|---------|-----------|
 | `search` | Full-text workspace search | ✓ |
-| `fetch` | Fetch web page content | ✓ |
+| `web` | Fetch web page content | ✓ |
+| `fetch` | Fetch web page content (alias in some environments) | ✓ |
 | `usages` | Find symbol usages | ✓ |
 | `githubRepo` | Search GitHub repositories | ✓ |
 | `agent` | Delegate to other agents | ✓ |
@@ -542,3 +543,42 @@ Reference existing `.agent.md` files in `.github/agents/` for patterns:
 - `ecosystem-orchestrator.core.agent.md` — Router/delegation
 
 All follow this standard and demonstrate best practices.
+
+---
+
+## Plan Agent Integration
+
+#### YAML Frontmatter
+- **Required Fields**:
+  - `name`: Agent display name (e.g., `Plan`).
+  - `description`: Brief summary of the agent's purpose.
+  - `tools`: Explicitly list tools required for planning tasks.
+  - `handoffs`: Define workflow transitions with clear prompts.
+
+#### Markdown Body
+- **Identity**:
+  - Clearly define the agent's role and scope.
+  - Example: "You are a PLANNING AGENT, responsible for creating actionable plans."
+
+- **Workflow**:
+  - Include `<workflow>` tags to outline the planning process.
+  - Example:
+    ```markdown
+    <workflow>
+    1. Context gathering and research.
+    2. Drafting a concise, actionable plan.
+    3. Iterating based on user feedback.
+    </workflow>
+    ```
+
+- **Stopping Rules**:
+  - Use `<stopping_rules>` to prevent the agent from executing implementation tasks.
+  - Example:
+    ```markdown
+    <stopping_rules>
+    STOP IMMEDIATELY if you consider starting implementation.
+    </stopping_rules>
+    ```
+
+- **Examples**:
+  - Provide concrete scenarios demonstrating the agent's planning capabilities.
