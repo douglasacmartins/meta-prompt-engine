@@ -157,7 +157,7 @@ description: A tool that helps analyze things
 tools: ['search', 'agent', 'read/readFile']
 handoffs:
   - label: Validate Results
-    agent: non-existent-validator
+    agent: reasoner
     prompt: Check my work
     send: false
 ---
