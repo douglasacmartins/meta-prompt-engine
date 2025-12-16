@@ -50,8 +50,7 @@ Use these tags for common content types:
 | `<instructions>` | Explicit directives or rules | How Claude should behave |
 | `<context>` | Background information | Reference material, examples, setup |
 | `<identity>` | Agent role and persona | Self-description at start of agent file |
-| `<process>` | Primary methodology container | Nests thinking, note, constraints; describes approach and reasoning |
-| `<thinking>` | Internal reasoning steps | Chain-of-thought reasoning; used within process stage |
+| `<process>` | Primary methodology container | Nests workflow, note, constraints; describes approach and reasoning |
 | `<note>` | Important clarification | Emphasis or warning; often nested in process |
 | `<constraints>` | Multiple constraints | Used with `<constraint>` children; often nested in process |
 | `<constraint>` | Single constraint | Boundary condition or limitation; child of constraints |
@@ -64,7 +63,7 @@ Use these tags for common content types:
 | `<requirement>` | Specific requirement | Must-have specification |
 | `<requirements>` | Multiple requirements | Used with `<requirement>` children |
 | `<definition>` | Term definition | Vocabulary or concept explanation |
-| `<workflow>` | Planning process steps | Outlines the sequence of actions for planning |
+| `<workflow>` | Process steps | Outlines the sequence of actions and checks |
 | `<stopping_rules>` | Agent boundaries | Defines conditions where the agent must stop execution |
 | `<plan_research>` | Research methodology | Details the process for gathering context and information |
 | `<plan_style_guide>` | Plan formatting guidelines | Provides a template for creating concise and actionable plans |
@@ -77,14 +76,14 @@ For agent files (.agent.md), structure content using **organized semantic nestin
 
 **Level 1 (Root):** `<instruction>` — Container for entire agent body
 **Level 2 (Primary):** `<process>` and `<output>` — Semantic containers
-**Level 3 (Leaf):** Specific tags like `<thinking>`, `<note>`, `<constraints>`, `<formatting>`, `<examples>`
+**Level 3 (Leaf):** Specific tags like `<workflow>`, `<note>`, `<constraints>`, `<formatting>`, `<examples>`
 
 ```xml
 <instruction>
   <identity>Agent role and persona</identity>
   
   <process>
-    <thinking>Reasoning steps and methodology</thinking>
+    <workflow>Process steps and methodology</workflow>
     <note>Important clarifications</note>
     <constraints>...</constraints>
   </process>
@@ -165,7 +164,7 @@ Use identical tag names across the file. If introducing a tag, use it consistent
 
 Enhance prompts by combining XML tags with other techniques:
 
-- Pair `<examples>` with `<thinking>` for multishot learning
+- Pair `<examples>` with `<workflow>` for multishot learning
 - Combine `<constraints>` with `<instructions>` for bounded guidance
 - Use `<formatting>` with `<answer>` for structured output
 
@@ -245,7 +244,7 @@ All .agent.md files MUST follow the organized nested pattern with exactly 3 sema
 <instruction>                           ← Level 1: Root container for entire agent
   ├─ <identity>                         ← Agent role/persona
   ├─ <process>                          ← Level 2: Methodology container
-  │   ├─ <thinking>                     ← Level 3: Internal reasoning
+  │   ├─ <workflow>                     ← Level 3: Process steps
   │   ├─ <note>                         ← Level 3: Clarifications
   │   └─ <constraints>                  ← Level 3: Limitations
   └─ <output>                           ← Level 2: Results container
@@ -264,22 +263,21 @@ All .agent.md files MUST follow the organized nested pattern with exactly 3 sema
 | `<process>` | Agent methodology and reasoning approach | How the agent thinks and operates |
 | `<output>` | Expected results and deliverables | What the agent produces |
 
-### When to Use `<thinking>`
+### When to Use `<workflow>`
 
-Use `<thinking>` tags INSIDE `<process>` to document:
-- **Chain-of-thought reasoning** — Multi-step logical sequences
+Use `<workflow>` tags INSIDE `<process>` to document:
 - **Methodology stages** — Formal processes (RADD, OPERA, etc.)
-- **Internal decision-making** — How the agent evaluates options
-- **Reasoning frameworks** — Structured approaches to problems
+- **Decision checkpoints** — How the agent evaluates options
+- **Operating procedure** — Ordered steps the agent follows
 
 Example:
 ```xml
 <process>
-<thinking>
+<workflow>
 **Stage 1: Research** — Gather facts
 **Stage 2: Hypothesis** — Form theories
 **Stage 3: Analysis** — Evaluate evidence
-</thinking>
+</workflow>
 </process>
 ```
 
@@ -325,7 +323,7 @@ You are the **[AGENT_NAME]**, [brief description of role and primary function].
 
 <process>
 
-<thinking>
+<workflow>
 [Describe the agent's reasoning methodology, stages, or decision-making framework]
 
 **Stage 1:** [First step in the process]
@@ -333,7 +331,7 @@ You are the **[AGENT_NAME]**, [brief description of role and primary function].
 
 **Stage 2:** [Second step]
 - [Details]
-</thinking>
+</workflow>
 
 <note>
 [Important clarifications about the agent's approach, scope limitations, or behavioral boundaries]
@@ -376,8 +374,8 @@ You are the **[AGENT_NAME]**, [brief description of role and primary function].
 
 - **`<identity>`** — FIRST tag after `<instruction>`, before `<process>`
 - **`<process>`** — First primary container, contains methodology
-- **`<thinking>`** — FIRST child of `<process>`, describes reasoning
-- **`<note>`** — AFTER `<thinking>` in `<process>`, contains clarifications
+- **`<workflow>`** — FIRST child of `<process>`, describes methodology
+- **`<note>`** — AFTER `<workflow>` in `<process>`, contains clarifications
 - **`<constraints>`** — LAST child of `<process>`, contains limitations
 - **`<output>`** — Second primary container, after `<process>`
 - **`<formatting>`** — FIRST child of `<output>`, specifies output structure
@@ -398,15 +396,15 @@ You are the **[NAME]**, [concise role and purpose description].
 </identity>
 ```
 
-### How `<thinking>` Fits Into the Process Stage
+### How `<workflow>` Fits Into the Process Stage
 
-`<thinking>` is the FIRST tag within `<process>` and documents:
+`<workflow>` is the FIRST tag within `<process>` and documents:
 - How the agent approaches problems
 - Formal methodologies used (RADD, OPERA, etc.)
-- Stage-by-stage breakdown of the thinking process
+- Stage-by-stage breakdown of the process
 - Decision-making frameworks
 
-It uses nested formatting (bullet points, bold headers) for readability but does NOT introduce additional XML tags. The `<thinking>` tag itself is a leaf node.
+It uses nested formatting (bullet points, bold headers) for readability but does NOT introduce additional XML tags. The `<workflow>` tag itself is a leaf node.
 
 ---
 
@@ -418,7 +416,7 @@ It uses nested formatting (bullet points, bold headers) for readability but does
 
 ```xml
 <instructions>Your methodology here</instructions>
-<thinking>Your reasoning here</thinking>
+<workflow>Your steps here</workflow>
 <formatting>Output format here</formatting>
 <examples>...</examples>
 ```
@@ -435,7 +433,7 @@ It uses nested formatting (bullet points, bold headers) for readability but does
   <identity>Agent role</identity>
   
   <process>
-    <thinking>Reasoning methodology</thinking>
+    <workflow>Reasoning methodology</workflow>
   </process>
   
   <output>
@@ -471,7 +469,7 @@ It uses nested formatting (bullet points, bold headers) for readability but does
   <identity>Agent Name — Description</identity>
   
   <process>
-    <thinking>Reasoning methodology</thinking>
+    <workflow>Reasoning methodology</workflow>
   </process>
   
   <output>
@@ -488,7 +486,7 @@ It uses nested formatting (bullet points, bold headers) for readability but does
 <instruction>
   <identity>Agent role</identity>
   
-  <thinking>Orphaned tag — should be in process</thinking>
+  <workflow>Orphaned tag — should be in process</workflow>
   <constraints>Should be in process</constraints>
   
   <formatting>Should be in output</formatting>
@@ -506,7 +504,7 @@ It uses nested formatting (bullet points, bold headers) for readability but does
   <identity>Agent role</identity>
   
   <process>
-    <thinking>Reasoning methodology</thinking>
+    <workflow>Reasoning methodology</workflow>
     <constraints>Limitations</constraints>
   </process>
   
@@ -549,10 +547,10 @@ Before committing any .agent.md file, verify:
 - [ ] Content within tags is relevant and focused
 
 ### Process Stage
-- [ ] `<thinking>` is first child of `<process>`
-- [ ] `<note>` appears after `<thinking>` (if present)
+- [ ] `<workflow>` is first child of `<process>`
+- [ ] `<note>` appears after `<workflow>` (if present)
 - [ ] `<constraints>` is last child of `<process>`
-- [ ] Methodology is clearly documented in `<thinking>`
+- [ ] Methodology is clearly documented in `<workflow>`
 
 ### Output Stage
 - [ ] `<formatting>` is first child of `<output>`

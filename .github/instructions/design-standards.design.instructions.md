@@ -48,8 +48,8 @@ Each file is self-contained. Do NOT reference other instruction files via markdo
 
 **Forbidden:**
 ```markdown
-See [File Name](../path/file.md)
-Reference [Communication Style](communication-style.vscode.instructions.md)
+See: File Name -> ../path/file.md
+Reference: Communication Style -> communication-style.vscode.instructions.md
 ```
 
 Communication style, naming conventions, and other shared standards are enforced by separate instruction files that apply automatically via their `applyTo` patterns. Trust the composition system.
@@ -97,16 +97,16 @@ Avoid repeating content across design specification files:
 - Type-specific examples and patterns
 
 ### REMOVE from Design Files (Already Defined Elsewhere)
-- Communication style rules (reference [communication-style.vscode.instructions.md](communication-style.vscode.instructions.md))
-- File naming patterns (reference [file-naming-convention.vscode.instructions.md](../instructions/file-naming-convention.vscode.instructions.md))
-- Tool reference tables (reference [agent-design.design.instructions.md](agent-design.design.instructions.md) Appendix)
+- Communication style rules (communication-style.vscode.instructions.md)
+- File naming patterns (file-naming-convention.vscode.instructions.md)
+- Tool reference tables (tool-usage.design.instructions.md)
 - Shared Overview table (include in agent-design only; reference from other two)
 
 ### How to Reference Instead of Duplicate
 
 **Style rules:**
 ```markdown
-Follow the [Communication Style Standard](communication-style.vscode.instructions.md):
+Follow the Communication Style Standard (communication-style.vscode.instructions.md):
 - Imperative mood, not requests
 - Direct constraints ("Do NOT...")
 - No hedging language
@@ -115,12 +115,12 @@ Follow the [Communication Style Standard](communication-style.vscode.instruction
 
 **Naming patterns:**
 ```markdown
-Naming follows the [File Naming Convention Standard](file-naming-convention.vscode.instructions.md) pattern: `{name}.{domain}.{type}.md`
+Naming follows the File Naming Convention Standard (file-naming-convention.vscode.instructions.md) pattern: `{name}.{domain}.{type}.md`
 ```
 
 **Tool reference:**
 ```markdown
-See [Agent File Design Standard Tool Reference](agent-design.design.instructions.md#appendix-tool-reference) for complete tool listing.
+See tool-usage.design.instructions.md for complete tool listing.
 ```
 
 ---
@@ -153,10 +153,10 @@ Before committing any design specification file, verify:
 - [ ] **Organized:** Uses consistent section hierarchy
 
 ### References & Links
-- [ ] **Cross-References:** Links to related design files (if applicable)
+- [ ] **Cross-References:** Refer to related standards by filename (no markdown links)
 - [ ] **Communication Style:** References communication-style.vscode.instructions.md
 - [ ] **Naming Convention:** References file-naming-convention.vscode.instructions.md
-- [ ] **Type-Specific:** Links to type-specific examples (if applicable)
+- [ ] **Type-Specific:** References type-specific examples by filename (no markdown links)
 
 ### Frontmatter Compliance
 - [ ] **Unique Focus:** Addresses one file type (agent / instructions / prompt)
@@ -180,9 +180,9 @@ Before committing any design specification file, verify:
 
 ```
 .github/instructions/
-├── agent-design.design.instructions.md
-├── instructions-file-design.design.instructions.md
-├── prompt-file-design.design.instructions.md
+├── agent.design.instructions.md
+├── instructions.design.instructions.md
+├── prompt.design.instructions.md
 └── design-standards.design.instructions.md  # This file
 ```
 

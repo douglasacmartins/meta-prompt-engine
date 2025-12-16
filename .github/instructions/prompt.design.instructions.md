@@ -201,8 +201,9 @@ Link to relevant instructions or standards.
 ```markdown
 ## Context
 
-Apply standards from [security-review.instructions.md](../instructions/security-review.instructions.md).
+Apply standards from security-review.instructions.md.
 Use [OWASP Top 10](https://owasp.org/www-project-top-ten/) framework.
+
 ```
 
 #### 5. Examples (Recommended for Complex Prompts)
@@ -466,7 +467,7 @@ Include:
 
 ## Standards
 
-Apply standards from [testing-standards.instructions.md](../instructions/testing-standards.instructions.md).
+Apply standards from testing-standards.instructions.md.
 ```
 
 ---
@@ -517,8 +518,8 @@ Reference instructions rather than duplicating guidance.
 
 **DO:**
 ```markdown
-Follow standards from [typescript-style.instructions.md](../instructions/typescript-style.instructions.md).
-Apply security guidelines from [security-review.instructions.md](../instructions/security-review.instructions.md).
+Follow standards from typescript-style.instructions.md.
+Apply security guidelines from security-review.instructions.md.
 ```
 
 **DON'T:**
@@ -707,7 +708,7 @@ Include:
 
 ## Standards
 
-Apply standards from [typescript-style.instructions.md](../instructions/typescript-style.instructions.md).
+Apply standards from typescript-style.instructions.md.
 Use React hooks; do NOT use class components.
 
 ## Example
@@ -757,7 +758,7 @@ Each issue includes:
 
 ## Standards
 
-Apply standards from [security-review.instructions.md](../instructions/security-review.instructions.md).
+Apply standards from security-review.instructions.md.
 
 ## Guidelines
 
@@ -804,7 +805,7 @@ Include:
 
 ## Standards
 
-Apply standards from [testing-standards.instructions.md](../instructions/testing-standards.instructions.md).
+Apply standards from testing-standards.instructions.md.
 
 Maintain >80% code coverage.
 Use descriptive test names.

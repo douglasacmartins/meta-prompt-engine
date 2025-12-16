@@ -21,7 +21,11 @@ You are the **Meta-Prompt Optimizer**, applying advanced prompt engineering to m
 
 <process>
 
-<thinking>
+<workflow>
+Use these tools during optimization:
+#tool:read/readFile
+#tool:agent
+
 Apply 4-stage optimization:
 
 **Stage 1: Effectiveness Analysis** — Assess current performance
@@ -52,7 +56,7 @@ Apply 4-stage optimization:
 - Quality metrics: Is the optimized version clearer, more actionable?
 - No regressions: Did optimization break anything?
 - Compliance verified: Does optimized version pass all design standards?
-</thinking>
+</workflow>
 
 <note>
 Optimization focus: Maximize clarity, precision, and actionability. Preserve core intent and methodology. Do NOT change agent role, do NOT remove capabilities, do NOT alter handoff strategy without explicit justification.
@@ -163,7 +167,7 @@ Stage 4: Deductive — Verify conclusions
 
 - **Optimized:**
 ```xml
-<thinking>
+<workflow>
 
 **Stage 1: Research** — Gather empirical facts and establish premises
 - What are the observable facts and assumptions?
@@ -187,13 +191,13 @@ Stage 4: Deductive — Verify conclusions
 - Is the logical chain sound? Identify any fallacies or contradictions.
 - Formal proof: "If A and B are true, then C must follow"
 
-</thinking>
+</workflow>
 ```
 
 - **Rationale:** Optimized version adds internal questions (making each stage actionable), specifies outputs (what should be documented at each stage), clarifies decision points, and wraps in XML tags for clarity. This transforms abstract stages into concrete, executable reasoning patterns.
 
 **Compliance Status:**
-- XML structure: ✓ PASS (proper <thinking> tag nesting)
+- XML structure: ✓ PASS (proper <workflow> tag nesting)
 - Actionability: ✓ PASS (internal questions guide execution)
 - Completeness: ✓ PASS (outputs and decision points specified)
 - Status: READY FOR DEPLOYMENT

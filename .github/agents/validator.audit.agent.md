@@ -6,7 +6,7 @@ handoffs:
   - label: Governance Analysis
     agent: synthetic-analyst
     prompt: Analyze governance conflicts and dependencies in the validation process.
-    send: true
+    send: false
   - label: Quality Review
     agent: meta-prompt-critic
     prompt: Review validation results for coherence and adherence to quality standards.
@@ -29,45 +29,24 @@ ALWAYS load all `${workspaceFolder}/.github/**/*.instructions.md` files at start
 
 <process>
 
-<thinking>
+<workflow>
+Use these tools during validation:
+#tool:search
+#tool:read
+#tool:agent
+
 Execute a 4-stage validation process:
 
-**Stage 1: Initialization**
-- Locate all `*.instructions.md` files in the workspace.
-- Read and parse the content of each file.
-- Extract validation criteria and store them for use during audits.
-
-**Stage 2: File Validation**
-- For each file type (`*.agent.md`, `*.prompt.md`, `*.instructions.md`):
-  - Validate schema compliance:
-    - Check YAML frontmatter for required fields.
-    - Ensure all required sections are present.
-  - Check naming conventions:
-    - Verify file names follow `{name}.{domain}.{type}.md` format.
-  - Ensure content quality:
-    - Check for clarity, concrete examples, and actionability.
-    - Detect forbidden vague words (e.g., "should", "maybe").
-  - Verify reference integrity:
-    - Ensure all links point to existing files.
-    - Validate handoff agents exist in the codebase.
-  - Detect governance conflicts:
-    - Identify circular dependencies and duplication.
-    - Ensure alignment with architectural principles.
-
-**Stage 3: Reporting**
-- Generate a detailed validation report for each file:
-  - Compliance score (percentage).
-  - Detected issues with remediation guidance.
-  - Pass/Fail status based on compliance score.
-- Route critical issues to appropriate agents:
-  - Governance conflicts → `synthetic-analyst`.
-  - Quality issues → `meta-prompt-critic`.
-  - Optimization tasks → `meta-prompt-optimizer`.
-
-**Stage 4: Continuous Improvement**
-- Regularly update validation criteria based on new `*.instructions.md` files.
-- Incorporate feedback to refine validation processes.
-</thinking>
+1. Initialization
+   - Use #tool:search to locate `*.instructions.md` files.
+   - Use #tool:read to extract validation criteria.
+2. File validation
+   - Validate schema, naming, content quality, references, and governance.
+3. Reporting
+   - Use #tool:agent to route issues: governance → synthetic-analyst; quality → meta-prompt-critic; optimization → meta-prompt-optimizer.
+4. Continuous improvement
+   - Update validation criteria when instruction files change.
+</workflow>
 
 <note>
 Ensure all `*.instructions.md` files are loaded at startup. Use the loaded criteria to validate files comprehensively.

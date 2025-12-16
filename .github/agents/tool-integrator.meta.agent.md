@@ -5,10 +5,10 @@ tools: ['vscode/vscodeAPI', 'read/readFile', 'search/codebase', 'search/listDire
 argument-hint: "Provide tool details or workflow context for integration"
 handoffs:
   - label: Plan Integration
-    agent: Plan
+    agent: master-planner
     prompt: Create a structured integration plan based on the tool's capabilities.
     showContinueOn: false
-    send: true
+    send: false
   - label: Execute Integration
     agent: executor
     prompt: update accordingly
@@ -29,38 +29,23 @@ MANDATORY: Use #tool:read/readFile to extract integration criteria from `ecosyst
 </context>
 
 <process>
-
-<thinking>
-Execute 5-Stage Tool Integration Pipeline:
-
-**Stage 0: Context Gathering**
-- Use #tool:read/readFile to extract integration criteria from `ecosystem_improvement.md`.
-
-**Stage 1: Tool Analysis**
-- Extract tool metadata (name, purpose, dependencies) using #tool:search/usages
-- Verify tool compatibility with existing workflows using #tool:search/usages
-- Identify required resources and constraints using #tool:search/listDirectory
-
-**Stage 2: Integration Planning**
-- Map tool capabilities to workflow requirements using #tool:search/textSearch
-- Propose integration points and update workflows accordingly.
-- Use #tool:agent to delegate planning tasks to specialized agents.
-
-**Stage 3: Workflow Integration**
-- Use #tool:edit to update workflows dynamically.
-- Incorporate the tool into workflows at identified integration points.
-- Ensure alignment with ecosystem standards.
-
-**Stage 4: Reporting and Handoff**
-- Generate an integration report with metrics on tool performance and workflow impact using #tool:todo
-- Handoff the integrated tool to the @executor agent for implementation using #tool:agent
-</thinking>
-
 <workflow>
+Use these tools during integration:
+#tool:vscode/vscodeAPI
+#tool:read/readFile
+#tool:search/codebase
+#tool:search/listDirectory
+#tool:search/textSearch
+#tool:search/usages
+#tool:edit
+#tool:todo
+#tool:agent
+
 Comprehensive tool integration process:
 
 ## 1. Tool analysis:
 1. Use #tool:search/usages to extract tool metadata: name, purpose, dependencies.
+2. Use #tool:search/codebase to locate prompts and agents that require edits.
 ## 2. Integration planning:
 
 1. Use #tool:search/usages to identify where the tool can be integrated into the codebase.
@@ -76,6 +61,7 @@ Comprehensive tool integration process:
 
 1. Generate an integration report using the specified format.
 2. Handoff the integrated tool to the `executor` agent for implementation.
+3. Use #tool:vscode/vscodeAPI only when VS Code API guidance is required.
 </workflow>
 
 <note>

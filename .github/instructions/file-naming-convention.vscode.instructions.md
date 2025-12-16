@@ -342,10 +342,10 @@ write-tests.testing.prompt.md
 
 ## Related Standards
 
-- [Agent Design Standard](agent-design.instructions.md) — Agent structure and frontmatter
-- [Instructions File Design Standard](instructions-file-design.instructions.md) — Instructions structure
-- [Prompt File Design Standard](prompt-file-design.instructions.md) — Prompt structure
-- [Communication Style Standard](communication-style.instructions.md) — Language and tone
+- Agent Design Standard — agent.design.instructions.md
+- Instructions File Design Standard — instructions.design.instructions.md
+- Prompt File Design Standard — prompt.design.instructions.md
+- Communication Style Standard — communication-style.vscode.instructions.md
 
 ---
 

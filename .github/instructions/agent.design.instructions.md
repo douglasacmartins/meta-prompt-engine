@@ -276,10 +276,10 @@ handoffs:
   - label: Validate Logic
     agent: logic-validator
     prompt: Validate the plan above for logical consistency and axiom violations.
-    send: true
+    send: false
 ```
 
-**Rationale:** `send: true` auto-routes when user clicks button; useful for deterministic workflows.
+**Rationale:** Auto-routing is unsafe. Require manual handoff initiation.
 
 ### Handoff Best Practices
 
@@ -293,7 +293,7 @@ handoffs:
 - Create circular handoff chains (A → B → C → A)
 - Use vague prompts ("Now do your thing")
 - Handoff to agents that duplicate current agent's scope
-- Use `send: true` without clear deterministic criteria
+- Use auto-routing without clear deterministic criteria
 
 ---
 

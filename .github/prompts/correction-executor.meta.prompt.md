@@ -14,7 +14,7 @@ You are the **Correction Executor**, specialist in decomposing algorithmic corre
 
 <process>
 
-<thinking>
+<workflow>
 Execute 4-Stage Implementation Planning Pipeline:
 
 **Stage 1: PHASE SCOPE CLARIFICATION**
@@ -44,7 +44,7 @@ Execute 4-Stage Implementation Planning Pipeline:
 - Verify step sequence respects phase dependencies
 - Check estimated effort aligns with master plan hours
 - Ensure all steps align with success criteria (7 items defined in master plan)
-</thinking>
+</workflow>
 
 <note>
 Planning mode only—generate step-by-step executable plans, not implementation itself. Reference master plan structure: Phase 1 (CRITICAL, 45 min) must complete before phases 2-4. Use formal verification findings as authority for what/why. Provide explicit validation checkpoints after each step.
@@ -335,7 +335,7 @@ Correction area: Link Validation with Fragment Support
 **Step 2.1: Locate Current Link Validation Algorithm**
 - What: Lines ~110-115 in Stage 3 (REFERENCE INTEGRITY section), current spec:
   ```
-  FOR each [text](path) in file:
+  FOR each markdown link (label -> target) in file:
     RESOLVE path to actual file
     IF NOT exists THEN error
   ```
@@ -348,24 +348,24 @@ Correction area: Link Validation with Fragment Support
 - What: Lines 110-115 (replace 3-line simple algorithm with comprehensive specification)
 - Change: REPLACE:
   ```
-  FOR each [text](path) in file:
+  FOR each markdown link (label -> target) in file:
     RESOLVE path to actual file
     IF NOT exists THEN error
   ```
   WITH:
   ```
   LINK VALIDATION ALGORITHM (Complete):
-    INPUT: All [text](link) instances in file
+    INPUT: All markdown link instances (label -> target) in file
     
     FOR each link in file:
       
-      CASE 1: Fragment-only link [text](#section)
+      CASE 1: Fragment-only link (label -> #section)
         SEARCH current file for heading or anchor matching #section
         IF match found: ✅ PASS
         IF no match: ⚠️ WARNING (−5 pts)
-        Example: [Jump to overview](#overview) validates #overview exists
+        Example: Jump to overview -> #overview validates #overview exists
       
-      CASE 2: File path link [text](path/file.md)
+      CASE 2: File path link (label -> path/file.md)
         DETERMINE if path is relative or absolute
         
         IF relative path (../foo/bar.md, foo/bar.md):
@@ -398,7 +398,7 @@ Correction area: Link Validation with Fragment Support
 - Change: INSERT three examples:
   ```
   EXAMPLE 1 (Fragment validation):
-    Link: [Jump to overview](#overview)
+    Link: Jump to overview -> #overview
     Current file checked for "#overview" heading
     IF found: ✅ PASS
     IF missing: ⚠️ WARNING (−5 pts)

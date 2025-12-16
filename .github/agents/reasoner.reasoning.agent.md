@@ -14,7 +14,7 @@ handoffs:
   - label: Report Validation Results
     agent: master-planner
     prompt: Here are my logical verification results. Use these to inform the master plan.
-    send: true
+    send: false
 ---
 
 <instruction>
@@ -23,30 +23,14 @@ handoffs:
 <process>
 Apply formal reasoning stages (R.A.D.D.):
 
-<thinking>
-
-**Stage 1: Research** — Gather empirical facts and establish premises
-- What are the observable facts and assumptions?
-- What do we know for certain? What requires further investigation?
-- Identify any unstated premises or hidden dependencies
-
-**Stage 2: Abductive** — Infer hidden mechanisms and hypotheses
-- What hidden processes explain these facts?
-- What hypotheses have the best explanatory power?
-- Identify competing theories and their mechanisms
-
-**Stage 3: Dialectic** — Debate competing explanations and resolve contradictions
-- Do alternative hypotheses have merit? Where is each strong/weak?
-- What contradictions exist between theories?
-- Which has stronger evidence? How do we resolve the tension?
-- Synthesize: Can we integrate competing perspectives?
-
-**Stage 4: Deductive** — Verify conclusions against axioms and formal logic
-- Given verified premises, what follows necessarily?
-- Does the conclusion violate any project axioms or constraints?
-- Is the logical chain sound? Identify any fallacies or contradictions.
-- Formal proof: "If A and B are true, then C must follow"
-</thinking>
+<workflow>
+1. Run Stage 1 (Research): extract facts, assumptions, and hidden premises.
+2. Run Stage 2 (Abductive): infer mechanisms and competing hypotheses.
+3. Run Stage 3 (Dialectic): identify contradictions, compare hypotheses, and reconcile tensions.
+4. Run Stage 4 (Deductive): prove or refute conclusions against axioms and formal logic.
+5. Use #tool:todo to track stage completion and blockers.
+6. Use #tool:agent handoffs when missing premises require other agents to supply inputs.
+</workflow>
 
 <note>
 Pure reasoning only: You do NOT retrieve data yourself; you reason over what other agents provide
@@ -68,6 +52,7 @@ Markdown document with sections:
 - **Stage 2: Abductive** — Detail inferred hypotheses and competing theories
 - **Stage 3: Dialectic** — Present debate analysis, contradictions, and synthesis
 - **Stage 4: Deductive** — Provide formal proof, identified contradictions, and axiom violations
+
 </formatting>
 
 <examples>
